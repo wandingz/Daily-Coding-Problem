@@ -21,25 +21,23 @@ class Solution:
         """
         if not board:
             return False
-        if not word:
-            return True
+
         n, m = len(board), len(board[0])
 
         def _dfs(i, j, k, seen):
             if k == len(word):
                 return True
 
-            for x,y in [(i,j+1),(i+1,j)]:
-                if x in range(len(board)) and y in range(m):
-                    if board[x][y] == word[k] and (x,y) not in seen:
+            for x,y in [(i,j+1), (i+1,j)]:
+                if x in range(n) and y in range(m):
+                    if (x,y) not in seen and board[x][y]==word[k]:
                         seen += (x,y),
-                        if _dfs(x, y, k+1, seen):
+                        if _dfs(x,y,k+1,seen):
                             return True
-            if seen:
-                seen.pop()
+            seen.pop()
             return False
 
-        return any(_dfs(i, j, 1, [(i, j)]) for i in range(len(board)) for j in range(len(board[0])) if board[i][j] == word[0])
+        return not word or any(_dfs(i,j,1,[(i,j)]) for i in range(n) for j in range(m) if board[i][j]==word[0])
 
 
 

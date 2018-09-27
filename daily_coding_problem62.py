@@ -13,8 +13,8 @@ Given a 5 by 5 matrix, there are 70 ways to get to the bottom-right.
 class Solution:
     def countMatrixPath(self, n, m):
         res = [[1 for _ in range(m)] for _ in range(n)]
-        for i in range(1, n):
-            for j in range(1, m):
+        for i in range(1,n):
+            for j in range(1,m):
                 res[i][j] = res[i-1][j] + res[i][j-1]
         return res[-1][-1]
 
